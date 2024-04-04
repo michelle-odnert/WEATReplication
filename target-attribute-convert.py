@@ -11,48 +11,50 @@ def create_word_list(path):
 def create_weat_dict(weat_dir, output_path):
     weat_dict = {}
 
-    # Iterate over files in directory to build dictionary
-    for data_name in os.listdir(weat_dir):
-        path = os.path.join(weat_dir, data_name)
+    # Target - attribute pairings
+    pairings = [
+        ('flowers', 'insects', 'pleasant', 'unpleasant'),
+        ('instruments', 'weapons', 'pleasant', 'unpleasant'),
+        ('European-American names', 'African-American names', 'pleasant', 'unpleasant'),
+        ('male_names', 'female_names', 'career', 'family'),
+        ('math', 'arts', 'male_terms', 'female_terms'),
+        ('science', 'arts', 'male_terms', 'female_terms'),
+        ('mental diseases', 'physical diseases', 'temporary', 'permanent'),
+        ('young names', 'old names', 'pleasant', 'unpleasant')
+    ]
 
-        if os.path.abspath(output_path):
-            continue
-        
-    # remove underscore and file extension
-    key = os.path.splitext(data_name)[0].replace('_', '')
-    values = create_word_list(path)
-    weat_dict[key] = {'words': values}
+    # Iterate over each pairing and populate the dictionary
+    for x_key, y_key, a_key, b_key in pairings:
+        # Standardize keys: remove underscores and convert to lowercase
+        std_x_key = x_key.replace('_', '').lower()
+        std_y_key = y_key.replace('_', '').lower()
+        std_a_key = a_key.replace('_', '').lower()
+        std_b_key = b_key.replace('_', '').lower()
 
-    weat_dict['flowers_vs_insects_pleasant_vs_unpleasant'] = {
-        'method': 'weat',
-        'X_key': 'flowers',
-        'Y_key': 'insects',
-        'A_key': 'pleasant',
-        'B_key': 'unpleasant',
-        'targets': 'flowers vs insects',
-        'attributes': 'pleasant vs unpleasant',
-    }
+        # Create dictionary structure for each pairing
+        weat_dict[f'{std_x_key}_vs_{std_y_key}_and_{std_a_key}_vs_{std_b_key}'] = {
+            'method': 'weat',
+            'X_key': std_x_key,
+            'Y_key': std_y_key,
+            'A_key': std_a_key,
+            'B_key': std_b_key,
+            'targets': f'{std_x_key} vs {std_y_key}',
+            'attributes': f'{std_a_key} vs {std_b_key}',
+        }
 
-    
-    # target: instruments vs. weapons
-    # attributes: pleasant vs. unpleasant
-    weat_dict['instruments_vs_weapons_pleasant_vs_unpleasant'] = {
-        'method': 'weat',
-        'X_key': 'instruments',
-        'Y_key': 'weapons',
-        'A_key': 'pleasant',
-        'B_key': 'unpleasant',
-        'targets': 'instruments vs weapons',
-        'attributes': 'pleasant vs unpleasant',
-    }
+    # Save to JSON file
+    with open(output_path, 'w') as f:
+        json.dump(weat_dict, f, sort_keys=True, indent=4)
 
-    # European-American vs. African-American names
-    weat_dict['EuropeanAmerican_vs_AfricanAmerican_pleasant_vs_unpleasant'] = {
-        'method': 'weat',
-        'X_key': 'EuropeanAmerican',
-        'Y_key': 'AfricanAmerican',
-        'A_key': 'pleasant',
-        'B_key': 'unpleasant',
-        'targets': 'European-American names vs African-American names',
-        'attributes': 'pleasant vs unpleasant',
-    }
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--weat_dir', type=str, required=True,
+                        help='WEAT data directory containing word lists')
+    parser.add_argument('--output', type=str, default='weat.json',
+                        help='Output JSON file path')
+    args = parser.parse_args()
+
+    create_weat_dict(args.weat_dir, args.output)
+
+if __name__ == '__main__':
+    main()
