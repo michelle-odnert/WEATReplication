@@ -1,9 +1,1 @@
-Target Words,Attribute Words,Number of Target Words (Nt),Number of Attribute Words (Na),d (effect size),p-value
-european-american names vs african-american names,pleasant vs unpleasant,4,2,-0.14034423232078552,1.0
-flowers vs insects,pleasant vs unpleasant,2,2,0.12021657079458237,0.0
-instruments vs weapons,pleasant vs unpleasant,2,2,-0.2003609836101532,1.0
-malenames vs femalenames,career vs family,0,2,,0.0
-math vs arts,maleterms vs femaleterms,2,0,,0.0
-mental diseases vs physical diseases,temporary vs permanent,4,2,2.099834794933031e-08,0.0
-science vs arts,maleterms vs femaleterms,2,0,,0.0
-young names vs old names,pleasant vs unpleasant,4,2,0.04007218778133392,0.0
+

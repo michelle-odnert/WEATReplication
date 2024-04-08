@@ -1,3 +1,4 @@
+import os
 from gensim.scripts.glove2word2vec import glove2word2vec
 from gensim.models import KeyedVectors
 import numpy as np
@@ -16,9 +17,27 @@ model = KeyedVectors.load_word2vec_format('glove.6B.50d.txt.word2vec', binary=Fa
 
 # load words from each word list file
 # find their corresponding vectors from GloVe model
-def load_vectors(word_list, model):
-    vectors = [model[word] for word in word_list if word in model]
-    return np.array(vectors)
+def load_vectors(key, model, weat_dir='wordlists'):
+    filename = f"{key.replace(' ', '_').lower()}"
+    filepath = os.path.join(weat_dir, filename)
+    
+    word_list = []
+    
+    try:
+        with open(filepath, 'r') as file:
+            # Load each word, delete whitespace and convert to lower 
+            word_list = [line.strip().lower() for line in file if line.strip()]
+    except FileNotFoundError:
+        print(f"File not found: {filepath}")
+        return np.array([])
+
+    # load the vectors for each word if exists in model
+    vectors = np.array([model[word] for word in word_list if word in model])
+
+    # debug if words were properly loaded
+    print(f"Loaded {len(vectors)} vectors for {len(word_list)} words from {filename}")
+    
+    return vectors
 
 # load in target-attribute pairings
 with open('weat_dict.json', 'r') as f:
@@ -26,18 +45,25 @@ with open('weat_dict.json', 'r') as f:
 
 # intiialize results list
 weat_results = []
+weat_dir = 'wordlists' 
 
-# Iterate over pairings and to compute weat score
+# Iterate over pairings to compute WEAT scores
 for pairing_name, pairing_info in pairings.items():
-    X = load_vectors(pairing_info['X_key'].split(), model)
-    Y = load_vectors(pairing_info['Y_key'].split(), model)
-    A = load_vectors(pairing_info['A_key'].split(), model)
-    B = load_vectors(pairing_info['B_key'].split(), model)
+    X = load_vectors(pairing_info['X_key'], model, weat_dir)
+    Y = load_vectors(pairing_info['Y_key'], model, weat_dir)
+    A = load_vectors(pairing_info['A_key'], model, weat_dir)
+    B = load_vectors(pairing_info['B_key'], model, weat_dir)
 
+    # Check for empty vector sets and skip the calculation if any set is empty
+    if len(X) == 0 or len(Y) == 0 or len(A) == 0 or len(B) == 0:
+        print(f"Skipping {pairing_name} due to missing data.")
+        continue
+
+    # Calculate WEAT effect size and p-value
     d = weat_effect_size(X, Y, A, B)
     p = weat_p_value(X, Y, A, B)
 
-    # add to results list
+    # Append results
     weat_results.append({
         'Target Words': pairing_info['targets'],
         'Attribute Words': pairing_info['attributes'],

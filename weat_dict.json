@@ -1,12 +1,12 @@
 {
-    "european-american names_vs_african-american names_and_pleasant_vs_unpleasant": {
+    "europeanamerican_names_vs_africanamerican_names_and_pleasant_vs_unpleasant": {
         "A_key": "pleasant",
         "B_key": "unpleasant",
-        "X_key": "european-american names",
-        "Y_key": "african-american names",
+        "X_key": "europeanamerican names",
+        "Y_key": "africanamerican names",
         "attributes": "pleasant vs unpleasant",
         "method": "weat",
-        "targets": "european-american names vs african-american names"
+        "targets": "europeanamerican names vs africanamerican names"
     },
     "flowers_vs_insects_and_pleasant_vs_unpleasant": {
         "A_key": "pleasant",

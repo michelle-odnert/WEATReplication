@@ -49,11 +49,11 @@ def weat_effect_size(X, Y, A, B):
     # small p value indivates observed differential assocaition is significantly greater than would be expected by chance
 def weat_p_value(X, Y, A, B, permutations=10000):
     observed = t_a_differential_association(X, Y, A, B)
-    combined_target_set = X + Y 
+    combined_target_set = np.concatenate((X, Y), axis=0)
     count_perm_greater_observed = 0
 
     for _ in range(permutations):
-        random.shuffle(combined_target_set)
+        np.random.shuffle(combined_target_set)
         rand_X = combined_target_set[:len(X)]
         rand_Y = combined_target_set[len(X):]
         if t_a_differential_association(rand_X, rand_Y, A, B) > observed:

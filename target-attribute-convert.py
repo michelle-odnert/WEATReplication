@@ -15,10 +15,10 @@ def create_weat_dict(weat_dir, output_path):
     pairings = [
         ('flowers', 'insects', 'pleasant', 'unpleasant'),
         ('instruments', 'weapons', 'pleasant', 'unpleasant'),
-        ('European-American names', 'African-American names', 'pleasant', 'unpleasant'),
-        ('male_names', 'female_names', 'career', 'family'),
-        ('math', 'arts', 'male_terms', 'female_terms'),
-        ('science', 'arts', 'male_terms', 'female_terms'),
+        ('EuropeanAmerican names', 'AfricanAmerican names', 'pleasant', 'unpleasant'),
+        ('male names', 'female names', 'career', 'family'),
+        ('math', 'arts', 'male terms', 'female terms'),
+        ('science', 'arts', 'male terms', 'female terms'),
         ('mental diseases', 'physical diseases', 'temporary', 'permanent'),
         ('young names', 'old names', 'pleasant', 'unpleasant')
     ]
