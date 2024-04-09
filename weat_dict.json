@@ -1,13 +1,4 @@
 {
-    "europeanamerican_names_vs_africanamerican_names_and_pleasant_vs_unpleasant": {
-        "A_key": "pleasant",
-        "B_key": "unpleasant",
-        "X_key": "europeanamerican names",
-        "Y_key": "africanamerican names",
-        "attributes": "pleasant vs unpleasant",
-        "method": "weat",
-        "targets": "europeanamerican names vs africanamerican names"
-    },
     "flowers_vs_insects_and_pleasant_vs_unpleasant": {
         "A_key": "pleasant",
         "B_key": "unpleasant",
@@ -26,21 +17,21 @@
         "method": "weat",
         "targets": "instruments vs weapons"
     },
-    "malenames_vs_femalenames_and_career_vs_family": {
+    "male names_vs_female names_and_career_vs_family": {
         "A_key": "career",
         "B_key": "family",
-        "X_key": "malenames",
-        "Y_key": "femalenames",
+        "X_key": "male names",
+        "Y_key": "female names",
         "attributes": "career vs family",
         "method": "weat",
-        "targets": "malenames vs femalenames"
+        "targets": "male names vs female names"
     },
-    "math_vs_arts_and_maleterms_vs_femaleterms": {
-        "A_key": "maleterms",
-        "B_key": "femaleterms",
+    "math_vs_arts_and_male terms_vs_female terms": {
+        "A_key": "male terms",
+        "B_key": "female terms",
         "X_key": "math",
         "Y_key": "arts",
-        "attributes": "maleterms vs femaleterms",
+        "attributes": "male terms vs female terms",
         "method": "weat",
         "targets": "math vs arts"
     },
@@ -53,12 +44,12 @@
         "method": "weat",
         "targets": "mental diseases vs physical diseases"
     },
-    "science_vs_arts_and_maleterms_vs_femaleterms": {
-        "A_key": "maleterms",
-        "B_key": "femaleterms",
+    "science_vs_arts_and_male terms_vs_female terms": {
+        "A_key": "male terms",
+        "B_key": "female terms",
         "X_key": "science",
         "Y_key": "arts",
-        "attributes": "maleterms vs femaleterms",
+        "attributes": "male terms vs female terms",
         "method": "weat",
         "targets": "science vs arts"
     },
@@ -70,5 +61,14 @@
         "attributes": "pleasant vs unpleasant",
         "method": "weat",
         "targets": "young names vs old names"
+    },
+    "europeanamerican names_vs_africanamerican names_and_pleasant_vs_unpleasant": {
+        "A_key": "pleasant",
+        "B_key": "unpleasant",
+        "X_key": "europeanamerican names",
+        "Y_key": "africanamerican names",
+        "attributes": "pleasant vs unpleasant",
+        "method": "weat",
+        "targets": "europeanamerican names vs africanamerican names"
     }
 }

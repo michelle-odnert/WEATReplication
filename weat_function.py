@@ -38,25 +38,34 @@ def t_a_differential_association(X, Y, A, B):
 # A: set 1 of attribute words' vector
 # B: set 2 of attribute words' vector
 def weat_effect_size(X, Y, A, B):
+    print("Starting weat_effect_size calculation...")
     x_associations = np.array([target_attribute_association(x, A, B) for x in X])
     y_associations = np.array([target_attribute_association(y, A, B) for y in Y])
+    print("Effect size calculated")
     return (np.mean(x_associations) - np.mean(y_associations)) / np.std(np.concatenate((x_associations, y_associations)))
+    
 
 # return one-sided p value using permutations (doesn't assume distribution of t-statistic)
 # Permutation process: combine two sets of target words, generate permutations of combined set
     # for each permutation caclulate differential association score
     # count num times permutated stats are greater than or equal to observed statistic
     # small p value indivates observed differential assocaition is significantly greater than would be expected by chance
-def weat_p_value(X, Y, A, B, permutations=10000):
+def weat_p_value(X, Y, A, B, permutations=100):
+    print("Starting weat_p_value calculation...")
     observed = t_a_differential_association(X, Y, A, B)
+    print(f"Observed differential association: {observed}")
     combined_target_set = np.concatenate((X, Y), axis=0)
     count_perm_greater_observed = 0
 
-    for _ in range(permutations):
+    print("Starting permutation test...")
+    for i in range(permutations):
         np.random.shuffle(combined_target_set)
         rand_X = combined_target_set[:len(X)]
         rand_Y = combined_target_set[len(X):]
         if t_a_differential_association(rand_X, rand_Y, A, B) > observed:
             count_perm_greater_observed += 1
+        print(f"Completed {i} permutations...")
 
+    print("P-value calculated")
     return count_perm_greater_observed / permutations
+ 

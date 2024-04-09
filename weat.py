@@ -49,10 +49,15 @@ weat_dir = 'wordlists'
 
 # Iterate over pairings to compute WEAT scores
 for pairing_name, pairing_info in pairings.items():
+    print(f"Processing {pairing_name}...")
     X = load_vectors(pairing_info['X_key'], model, weat_dir)
+    print(f"Loaded X: {len(X)} vectors.")
     Y = load_vectors(pairing_info['Y_key'], model, weat_dir)
+    print(f"Loaded Y: {len(Y)} vectors.")
     A = load_vectors(pairing_info['A_key'], model, weat_dir)
+    print(f"Loaded A: {len(A)} vectors.")
     B = load_vectors(pairing_info['B_key'], model, weat_dir)
+    print(f"Loaded B: {len(B)} vectors.")
 
     # Check for empty vector sets and skip the calculation if any set is empty
     if len(X) == 0 or len(Y) == 0 or len(A) == 0 or len(B) == 0:
@@ -60,8 +65,10 @@ for pairing_name, pairing_info in pairings.items():
         continue
 
     # Calculate WEAT effect size and p-value
+    print("Calculating effect size and p-value...")
     d = weat_effect_size(X, Y, A, B)
     p = weat_p_value(X, Y, A, B)
+    print(f"Calculated d: {d}, p: {p}")
 
     # Append results
     weat_results.append({
@@ -72,6 +79,7 @@ for pairing_name, pairing_info in pairings.items():
         'd (effect size)': d,
         'p-value': p
     })
+    print("Results appended.")
 
 # Convert results to a DataFrame and save or display
 results_df = pd.DataFrame(weat_results)

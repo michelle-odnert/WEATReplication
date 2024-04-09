@@ -1,1 +1,8 @@
-
+Target Words,Attribute Words,Number of Target Words (Nt),Number of Attribute Words (Na),d (effect size),p-value
+flowers vs insects,pleasant vs unpleasant,49,50,0.12378981,0.01
+instruments vs weapons,pleasant vs unpleasant,50,50,-0.10248203,1.0
+math vs arts,male terms vs female terms,16,16,-0.07002189,0.91
+mental diseases vs physical diseases,temporary vs permanent,12,14,-0.10713431,0.92
+science vs arts,male terms vs female terms,16,16,-0.07002189,0.92
+young names vs old names,pleasant vs unpleasant,17,50,-0.093377024,0.92
+europeanamerican names vs africanamerican names,pleasant vs unpleasant,63,50,0.0002419397,0.59
